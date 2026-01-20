@@ -1,6 +1,7 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Woody {
+    private static ArrayList<String> list = new ArrayList();
 
     public static void greet() {
         System.out.println("Hello! I'm Woody \nWhat can I do for you?\n");
@@ -30,7 +31,8 @@ public class Woody {
             }
 
             line();
-            System.out.println("Woody: " + input);
+            System.out.println("added: " + input);
+            list.add(input);
             line();
         }
 
