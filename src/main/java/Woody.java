@@ -23,14 +23,21 @@ public class Woody {
         while (true) {
             System.out.print("You: ");
             String input = scanner.nextLine();
+            String[] parts = input.split(" ");
 
-            if(input.equals("list")) {
+            if(parts[0].equals("mark")) {
+                line();
+                mark(parts[1]);
+                continue;
+            }
+
+            if(parts[0].equals("list")) {
                 line();
                 displayList();
                 continue;
             }
 
-            if (input.equals("bye")) {
+            if (parts[0].equals("bye")) {
                 line();
                 exit();
                 break;
@@ -50,6 +57,14 @@ public class Woody {
         for(int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1));
         }
+        line();
+    }
+
+    public static void mark(String num) {
+        Task task = list.get(Integer.parseInt(num) - 1);
+        task.markDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task + "\n");
         line();
     }
 
