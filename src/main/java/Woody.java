@@ -2,6 +2,7 @@ public class Woody {
 
     public static void greet() {
         System.out.println("Hello! I'm Woody \nWhat can I do for you?\n");
+        line();
     }
 
     public static void line() {
@@ -10,6 +11,7 @@ public class Woody {
 
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!\n");
+        line();
     }
 
     public static void showLogo() {
@@ -21,14 +23,12 @@ public class Woody {
                 + "  W   W     OOOO   OOOO   DDDDD       Y   \n";
 
         System.out.println("Hello from\n" + logo);
+        line();
     }
     public static void main(String[] args) {
         // Used chatgpt to generate the logo
         showLogo();
-        line();
         greet();
-        line();
-        exit();
-        line();
+        
     }
 }
