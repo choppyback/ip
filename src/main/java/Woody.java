@@ -23,7 +23,15 @@ public class Woody {
         while (true) {
             System.out.print("You: ");
             String input = scanner.nextLine();
-            String[] parts = input.split(" ");
+            String[] parts = input.split(" ", 2);
+
+            if(parts[0].equals("todo")) {
+                line();
+                todo(parts[1]);
+                line();
+                continue;
+            }
+
 
             if(parts[0].equals("mark")) {
                 line();
@@ -80,6 +88,18 @@ public class Woody {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + task + "\n");
         line();
+    }
+
+    public static void todo(String description) {
+        ToDo task = new ToDo(description);
+        addTask(task);
+    }
+
+    public static void addTask(Task task) {
+        list.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.\n");
     }
 
     public static void showLogo() {
