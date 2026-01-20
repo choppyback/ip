@@ -39,6 +39,13 @@ public class Woody {
                 continue;
             }
 
+            if(parts[0].equals("event")) {
+                line();
+                event(parts[1]);
+                line();
+                continue;
+            }
+
             if(parts[0].equals("mark")) {
                 line();
                 mark(parts[1]);
@@ -106,6 +113,14 @@ public class Woody {
         Deadline task = new Deadline(parts[0], parts[1]);
         addTask(task);
     }
+
+    public static void event(String input) {
+        String[] parts = input.split("/from", 2);
+        String[] datePart = parts[1].split("/to", 2);
+        Event task = new Event(parts[0], datePart[0], datePart[1]);
+        addTask(task);
+    }
+        
 
     public static void addTask(Task task) {
         list.add(task);
