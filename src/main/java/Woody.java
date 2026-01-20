@@ -32,6 +32,12 @@ public class Woody {
                 continue;
             }
 
+            if(parts[0].equals("deadline")) {
+                line();
+                deadline(parts[1]);
+                line();
+                continue;
+            }
 
             if(parts[0].equals("mark")) {
                 line();
@@ -92,6 +98,12 @@ public class Woody {
 
     public static void todo(String description) {
         ToDo task = new ToDo(description);
+        addTask(task);
+    }
+
+    public static void deadline(String input) {
+        String[] parts = input.split("/by ");
+        Deadline task = new Deadline(parts[0], parts[1]);
         addTask(task);
     }
 
