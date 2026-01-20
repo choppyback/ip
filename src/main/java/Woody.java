@@ -24,6 +24,12 @@ public class Woody {
             System.out.print("You: ");
             String input = scanner.nextLine();
 
+            if(input.equals("list")) {
+                line();
+                displayList();
+                continue;
+            }
+
             if (input.equals("bye")) {
                 line();
                 exit();
@@ -37,6 +43,13 @@ public class Woody {
         }
 
         scanner.close();
+    }
+
+    public static void displayList() {
+        for(int i = 1; i <= list.size(); i++) {
+            System.out.println(i + ". " + list.get(i - 1));
+        }
+        line();
     }
 
     public static void showLogo() {
