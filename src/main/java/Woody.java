@@ -46,6 +46,7 @@ public class Woody {
     }
 
     public static void displayList() {
+        System.out.println("Here are the tasks in your list: ");
         for(int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1));
         }
