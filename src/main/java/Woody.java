@@ -7,6 +7,10 @@ public class Woody {
     public static void line() {
         System.out.println("-----------------------");
     }
+
+    public static void exit() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
     public static void main(String[] args) {
         // Used chatgpt to generate the logo
         String logo =
@@ -19,6 +23,8 @@ public class Woody {
         System.out.println("Hello from\n" + logo);
         line();
         greet();
+        line();
+        exit();
         line();
     }
 }
