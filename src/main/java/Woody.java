@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Woody {
 
     public static void greet() {
@@ -12,6 +14,27 @@ public class Woody {
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!\n");
         line();
+    }
+
+    public static void chat() {
+        Scanner scanner = new Scanner(System.in);
+        
+        while (true) {
+            System.out.print("You: ");
+            String input = scanner.nextLine();
+
+            if (input.equals("bye")) {
+                line();
+                exit();
+                break;
+            }
+
+            line();
+            System.out.println("Woody: " + input);
+            line();
+        }
+
+        scanner.close();
     }
 
     public static void showLogo() {
@@ -29,6 +52,6 @@ public class Woody {
         // Used chatgpt to generate the logo
         showLogo();
         greet();
-        
+        chat();
     }
 }
