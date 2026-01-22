@@ -56,6 +56,11 @@ public class Woody {
                         unmark(parts);
                         line();
                         break;
+                    case "delete":
+                        line();
+                        delete(parts);
+                        line();
+                        break;
                     case "list":
                         line();
                         displayList();
@@ -101,6 +106,16 @@ public class Woody {
         task.unmarkDone();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + task + "\n");
+    }
+
+    public static void delete(String[] parts) throws InvalidSyntaxException {
+        if (parts.length < 2) {
+            throw new InvalidSyntaxException();
+        }
+        Task task = list.remove(Integer.parseInt(parts[1]) - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task + "\n");
+        System.out.println("Now you have " + list.size() + " tasks in the list.\n");
     }
 
     public static void todo(String[] parts) throws InvalidSyntaxException {
