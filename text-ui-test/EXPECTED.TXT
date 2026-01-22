@@ -55,6 +55,18 @@ Here are the tasks in your list:
 3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 -----------------------
 You: -----------------------
+Noted. I've removed this task:
+  [D][ ] return book (by: Sunday)
+
+Now you have 2 tasks in the list.
+
+-----------------------
+You: -----------------------
+Here are the tasks in your list: 
+1. [T][ ] borrow book
+2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+-----------------------
+You: -----------------------
 Bye. Hope to see you again soon!
 
 -----------------------
