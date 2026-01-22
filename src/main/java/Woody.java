@@ -21,62 +21,59 @@ public class Woody {
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
-            System.out.print("You: ");
-            String input = scanner.nextLine();
-            String[] parts = input.split(" ", 2);
+            try {
+                System.out.print("You: ");
+                String input = scanner.nextLine().trim();
+                String[] parts = input.split(" ", 2);
 
-            if(parts[0].equals("todo")) {
+                switch (parts[0]) {
+                    case "todo":
+                        line();
+                        todo(parts);
+                        line();
+                        break;
+
+                    case "deadline":
+                        line();
+                        deadline(parts);
+                        line();
+                        break;
+
+                    case "event":
+                        line();
+                        event(parts);
+                        line();
+                        break;
+
+                    case "mark":
+                        line();
+                        mark(parts);
+                        line();
+                        break;
+
+                    case "unmark":
+                        line();
+                        unmark(parts);
+                        line();
+                        break;
+                    case "list":
+                        line();
+                        displayList();
+                        line();
+                        break;
+                    case "bye":
+                        line();
+                        exit();
+                        return;
+                    default:
+                        line();
+                        throw new UnknownCommandException(input);
+                }
+            } catch (WoodyException e) {
+                System.out.println(e.getMessage());
                 line();
-                todo(parts[1]);
-                line();
-                continue;
             }
-
-            if(parts[0].equals("deadline")) {
-                line();
-                deadline(parts[1]);
-                line();
-                continue;
-            }
-
-            if(parts[0].equals("event")) {
-                line();
-                event(parts[1]);
-                line();
-                continue;
-            }
-
-            if(parts[0].equals("mark")) {
-                line();
-                mark(parts[1]);
-                continue;
-            }
-
-            if(parts[0].equals("unmark")) {
-                line();
-                unmark(parts[1]);
-                continue;
-            }
-
-            if(parts[0].equals("list")) {
-                line();
-                displayList();
-                continue;
-            }
-
-            if (parts[0].equals("bye")) {
-                line();
-                exit();
-                break;
-            }
-
-            line();
-            System.out.println("added: " + input);
-            list.add(new Task(input));
-            line();
         }
-
-        scanner.close();
     }
 
     public static void displayList() {
@@ -84,40 +81,52 @@ public class Woody {
         for(int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1));
         }
-        line();
     }
 
-    public static void mark(String num) {
-        Task task = list.get(Integer.parseInt(num) - 1);
+    public static void mark(String[] parts) throws InvalidSyntaxException { 
+        if (parts.length < 2) {
+            throw new InvalidSyntaxException();
+        }
+        Task task = list.get(Integer.parseInt(parts[1]) - 1);
         task.markDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task + "\n");
-        line();
     }
 
-    public static void unmark(String num) {
-        Task task = list.get(Integer.parseInt(num) - 1);
+    public static void unmark(String[] parts) throws InvalidSyntaxException {
+        if (parts.length < 2) {
+            throw new InvalidSyntaxException();
+        }
+        Task task = list.get(Integer.parseInt(parts[1]) - 1);
         task.unmarkDone();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + task + "\n");
-        line();
     }
 
-    public static void todo(String description) {
-        ToDo task = new ToDo(description);
+    public static void todo(String[] parts) throws InvalidSyntaxException {
+        if (parts.length < 2) {
+            throw new InvalidSyntaxException();
+        }
+        ToDo task = new ToDo(parts[1]);
         addTask(task);
     }
 
-    public static void deadline(String input) {
-        String[] parts = input.split("/by ");
-        Deadline task = new Deadline(parts[0], parts[1]);
+    public static void deadline(String[] parts) throws InvalidSyntaxException {
+        if (parts.length < 2 || !parts[1].contains("/by")) {
+            throw new InvalidSyntaxException();
+        }
+        String[] arguments = parts[1].split("/by ");
+        Deadline task = new Deadline(arguments[0], arguments[1]);
         addTask(task);
     }
 
-    public static void event(String input) {
-        String[] parts = input.split("/from", 2);
-        String[] datePart = parts[1].split("/to", 2);
-        Event task = new Event(parts[0], datePart[0], datePart[1]);
+    public static void event(String[] parts) throws InvalidSyntaxException {
+        if (parts.length < 2 || (!parts[1].contains("/by") && !parts[1].contains("/to"))) {
+            throw new InvalidSyntaxException();
+        }
+        String[] arguments = parts[1].split("/from", 2);
+        String[] datePart = arguments[1].split("/to", 2);
+        Event task = new Event(arguments[0], datePart[0], datePart[1]);
         addTask(task);
     }
         
