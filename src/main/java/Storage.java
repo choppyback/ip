@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
@@ -27,4 +29,21 @@ public class Storage {
             }
         }
     }
+
+    public static ArrayList<Task> load() throws IOException {
+        ensureFileExist();
+        Path filePath = Paths.get(FILE_PATH);
+
+        ArrayList<Task> list = new ArrayList<>();
+    
+        List<String> lines = Files.readAllLines(filePath);
+        for (String line : lines) {
+            Task task = Task.fileToTask(line);
+            if (task != null) {
+                list.add(task);
+            }
+        }
+        return list;
+    }
+
 }
