@@ -15,8 +15,15 @@ public class Task {
         isDone = true;
     }
 
-     public void unmarkDone() {
+    public void unmarkDone() {
         isDone = false;
+    }
+
+    public String toFileString() {
+        return String.format("| %d | %s",
+            isDone ? 1 : 0,
+            description
+        );
     }
 
     @Override
