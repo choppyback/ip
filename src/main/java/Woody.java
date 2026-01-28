@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Woody {
@@ -12,8 +13,17 @@ public class Woody {
         System.out.println("-----------------------");
     }
 
+    public static void saveList() {
+        try {
+            Storage.save(list);
+        } catch (IOException e) {
+            System.out.println("Error saving file");
+        }
+    }
+
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!\n");
+        saveList();
         line();
     }
 
