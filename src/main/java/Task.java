@@ -1,6 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+
+    protected static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
 
     public Task(String description) {
         this.description = description;
@@ -37,10 +43,10 @@ public class Task {
                 task = new ToDo(parts[2]);
                 break;
             case "D":
-                task = new Deadline(parts[2], parts[3]);
+                task = new Deadline(parts[2], LocalDateTime.parse(parts[3]));
                 break;
             case "E":
-                task = new Event(parts[2], parts[3], parts[4]);
+                task = new Event(parts[2], LocalDateTime.parse(parts[3]), LocalDateTime.parse(parts[4]));
                 break;
             default:
                 return null;
