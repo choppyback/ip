@@ -28,7 +28,6 @@ public class Task {
     public static Task fileToTask(String line) {
         try {
             String[] parts = line.split(" \\| ");
-            System.out.println(parts[1]);
             String type = parts[0];
             boolean isDone = parts[1].equals("1");
             Task task;
