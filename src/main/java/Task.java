@@ -25,6 +25,37 @@ public class Task {
             description
         );
     }
+    public static Task fileToTask(String line) {
+        try {
+            String[] parts = line.split(" \\| ");
+            System.out.println(parts[1]);
+            String type = parts[0];
+            boolean isDone = parts[1].equals("1");
+            Task task;
+
+            switch (type) {
+            case "T":
+                task = new ToDo(parts[2]);
+                break;
+            case "D":
+                task = new Deadline(parts[2], parts[3]);
+                break;
+            case "E":
+                task = new Event(parts[2], parts[3], parts[4]);
+                break;
+            default:
+                return null;
+            }
+
+            if (isDone) {
+                task.markDone();
+            }
+            return task;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @Override
     public String toString() {
