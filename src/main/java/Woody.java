@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Woody {
-    private static ArrayList<Task> list = new ArrayList();
+    private static ArrayList<Task> list;
 
     public static void greet() {
         System.out.println("Hello! I'm Woody \nWhat can I do for you?\n");
@@ -12,12 +13,22 @@ public class Woody {
         System.out.println("-----------------------");
     }
 
+    public static void saveList() {
+        try {
+            Storage.save(list);
+        } catch (IOException e) {
+            System.out.println("Error saving file");
+        }
+    }
+
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!\n");
+        saveList();
         line();
     }
 
     public static void chat() {
+        loadTask();
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
@@ -151,6 +162,14 @@ public class Woody {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + list.size() + " tasks in the list.\n");
+    }
+
+    public static void loadTask() {
+        try {
+            list = Storage.load();
+        } catch (IOException e) {
+            list = new ArrayList<>();
+        }
     }
 
     public static void showLogo() {
