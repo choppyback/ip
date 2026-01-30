@@ -24,14 +24,17 @@ public class Storage {
         }
     }
 
-    public static void save(ArrayList<Task> tasks) throws IOException {
-        ensureFileExist();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : tasks) {
-                writer.write(task.toFileString());
-                writer.newLine();
+    public void save(ArrayList<Task> tasks) {
+        try {
+            ensureFileExist();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+                for (Task task : tasks) {
+                    writer.write(task.toFileString());
+                    writer.newLine();
+                }
             }
+        } catch (IOException e) {
+            System.out.println("Error saving file");
         }
     }
 
