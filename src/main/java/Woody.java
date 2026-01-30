@@ -29,40 +29,41 @@ public class Woody {
         while (true) {
             try {
                 String input = ui.readCommand();
-                String[] parts = input.split(" ", 2);
+                String command = Parser.getCommand(input);
+                String arguments = Parser.getArguments(input);
 
-                switch (parts[0]) {
-                    case "todo":
-                        todo(parts);
-                        break;
+                switch (command) {
+                case "todo":
+                    todo(arguments);
+                    break;
 
-                    case "deadline":
-                        deadline(parts);
-                        break;
+                case "deadline":
+                    deadline(arguments);
+                    break;
 
-                    case "event":
-                        event(parts);
-                        break;
+                case "event":
+                    event(arguments);
+                    break;
 
-                    case "mark":
-                        mark(parts);
-                        break;
+                case "mark":
+                    mark(arguments);
+                    break;
 
-                    case "unmark":
-                        unmark(parts);
-                        break;
-                    case "delete":
-                        delete(parts);
-                        break;
-                    case "list":
-                        ui.showTaskList(list);
-                        break;
-                    case "bye":
-                        ui.showBye();
-                        saveList();
-                        return;
-                    default:
-                        throw new UnknownCommandException(input);
+                case "unmark":
+                    unmark(arguments);
+                    break;
+                case "delete":
+                    remove(arguments);
+                    break;
+                case "list":
+                    ui.showTaskList(list);
+                    break;
+                case "bye":
+                    ui.showBye();
+                    saveList();
+                    return;
+                default:
+                    throw new UnknownCommandException(input);
                 }
             } catch (WoodyException e) {
                 ui.showError(e.getMessage());
@@ -70,58 +71,42 @@ public class Woody {
         }
     }
 
-    public void mark(String[] parts) throws InvalidSyntaxException { 
-        if (parts.length < 2) {
-            throw new InvalidSyntaxException();
-        }
-        Task task = list.get(Integer.parseInt(parts[1]) - 1);
+    public void mark(String arguments) throws InvalidSyntaxException { 
+        int taskIndex = Parser.getTaskIndex(arguments);
+        Task task = list.get(taskIndex);
         task.markDone();
         ui.showTaskMarked(task);
     }
 
-    public void unmark(String[] parts) throws InvalidSyntaxException {
-        if (parts.length < 2) {
-            throw new InvalidSyntaxException();
-        }
-        Task task = list.get(Integer.parseInt(parts[1]) - 1);
+    public void unmark(String arguments) throws InvalidSyntaxException {
+        int taskIndex = Parser.getTaskIndex(arguments);
+        Task task = list.get(taskIndex);
         task.unmarkDone();
         ui.showTaskUnmarked(task);
     }
 
-    public void delete(String[] parts) throws InvalidSyntaxException {
-        if (parts.length < 2) {
-            throw new InvalidSyntaxException();
-        }
-        Task task = list.remove(Integer.parseInt(parts[1]) - 1);
+    public void remove(String arguments) throws InvalidSyntaxException {
+        int taskIndex = Parser.getTaskIndex(arguments);
+        Task task = list.remove(taskIndex);
         ui.showTaskRemoved(task, list.size());
     }
 
-    public void todo(String[] parts) throws InvalidSyntaxException {
-        if (parts.length < 2) {
-            throw new InvalidSyntaxException();
-        }
-        ToDo task = new ToDo(parts[1]);
+    public void todo(String arguments) throws InvalidSyntaxException {
+        ToDo task = new ToDo(arguments);
         list.add(task);
         ui.showTaskAdded(task, list.size());
     }
 
-    public void deadline(String[] parts) throws InvalidSyntaxException {
-        if (parts.length < 2 || !parts[1].contains("/by")) {
-            throw new InvalidSyntaxException();
-        }
-        String[] arguments = parts[1].split("/by ");
-        Deadline task = new Deadline(arguments[0], arguments[1]);
+    public void deadline(String arguments) throws InvalidSyntaxException {
+        String[] parsedArguments = Parser.getDeadlineArguments(arguments);
+        Deadline task = new Deadline(parsedArguments[0], parsedArguments[1]);
         list.add(task);
         ui.showTaskAdded(task, list.size());
     }
 
-    public void event(String[] parts) throws InvalidSyntaxException {
-        if (parts.length < 2 || (!parts[1].contains("/by") && !parts[1].contains("/to"))) {
-            throw new InvalidSyntaxException();
-        }
-        String[] arguments = parts[1].split("/from", 2);
-        String[] datePart = arguments[1].split("/to", 2);
-        Event task = new Event(arguments[0], datePart[0], datePart[1]);
+    public void event(String arguments) throws InvalidSyntaxException {
+        String[] parsedArguments = Parser.getEventArguments(arguments);
+        Event task = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
         list.add(task);
         ui.showTaskAdded(task, list.size());
     }
