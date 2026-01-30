@@ -1,5 +1,10 @@
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,18 +24,21 @@ public class Storage {
         }
     }
 
-    public static void save(List<Task> tasks) throws IOException {
-        ensureFileExist();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : tasks) {
-                writer.write(task.toFileString());
-                writer.newLine();
+    public void save(ArrayList<Task> tasks) {
+        try {
+            ensureFileExist();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+                for (Task task : tasks) {
+                    writer.write(task.toFileString());
+                    writer.newLine();
+                }
             }
+        } catch (IOException e) {
+            System.out.println("Error saving file");
         }
     }
 
-    public static ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         ensureFileExist();
         Path filePath = Paths.get(FILE_PATH);
 
