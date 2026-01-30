@@ -13,10 +13,6 @@ public class TaskList {
 
     public void add(Task task) {
         list.add(task);
-        // Under UI
-        // System.out.println("Got it. I've added this task:");
-        // System.out.println("  " + task);
-        // System.out.println("Now you have " + list.size() + " tasks in the list.\n");
     }
 
     public Task get(int index) {
