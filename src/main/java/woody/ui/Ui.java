@@ -1,4 +1,8 @@
+package woody.ui;
 import java.util.Scanner;
+
+import woody.task.Task;
+import woody.task.TaskList;
 
 public class Ui {
     private Scanner scanner;
