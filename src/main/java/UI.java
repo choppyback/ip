@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
     private Scanner scanner;
 
-    public UI() {
+    public Ui() {
         scanner = new Scanner(System.in);
     }
 
