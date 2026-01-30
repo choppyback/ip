@@ -8,21 +8,13 @@ public class Woody {
     public Woody(String filePath) {
         storage = new Storage();
         ui = new Ui();
-        loadTask();
     }
 
     public void run() {
+        loadTask();
         ui.showLogo();
         ui.showWelcome();
         chat();
-    }
-
-    public void saveList() {
-        try {
-            storage.save(tasks.getTasks());
-        } catch (IOException e) {
-            System.out.println("Error saving file");
-        }
     }
 
     public void chat() {
@@ -60,7 +52,7 @@ public class Woody {
                     break;
                 case "bye":
                     ui.showBye();
-                    saveList();
+                    storage.save(tasks.getTasks());
                     return;
                 default:
                     throw new UnknownCommandException(input);
