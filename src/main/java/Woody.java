@@ -19,7 +19,7 @@ public class Woody {
 
     public void saveList() {
         try {
-            storage.save(tasks.getList());
+            storage.save(tasks.getTasks());
         } catch (IOException e) {
             System.out.println("Error saving file");
         }
