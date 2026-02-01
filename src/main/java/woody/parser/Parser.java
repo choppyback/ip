@@ -13,8 +13,17 @@ public class Parser {
         return parts.length < 2 ? "" : parts[1];
     }
 
-    public static int getTaskIndex(String arg) {
-        return Integer.parseInt(arg) - 1;
+    public static int getTaskIndex(String arg) throws InvalidSyntaxException {
+        if (arg.isBlank()) {
+            throw new InvalidSyntaxException();
+        }
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidSyntaxException();
+        }
+        return index;
     }
 
     public static String[] getDeadlineArguments(String args) throws InvalidSyntaxException {
