@@ -20,6 +20,7 @@ public class Woody {
     private TaskList tasks;
 
     public Woody(String filePath) {
+    public Woody() {
         storage = new Storage();
         ui = new Ui();
     }
@@ -126,6 +127,6 @@ public class Woody {
     }
 
     public static void main(String[] args) {
-        new Woody("data/tasks.txt").run();
+        new Woody().run();
     }
 }
