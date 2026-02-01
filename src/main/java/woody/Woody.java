@@ -99,6 +99,7 @@ public class Woody {
     }
 
     public void todo(String arguments) throws InvalidSyntaxException {
+    public void todo(String arguments) {
         ToDo task = new ToDo(arguments);
         tasks.add(task);
         ui.showTaskAdded(task, tasks.size());
