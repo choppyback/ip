@@ -81,6 +81,9 @@ public class Woody {
                 case "list":
                     ui.showTaskList(tasks);
                     break;
+                case "find":
+                    find(arguments);
+                    break;
                 case "bye":
                     ui.showBye();
                     storage.save(tasks.getTasks());
@@ -92,6 +95,17 @@ public class Woody {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Finds tasks whose descriptions contain the given keyword
+     * and displays them to the user.
+     *
+     * @param keyword Keyword to search for.
+     */
+    public void find(String keyword) {
+        TaskList matchedTask = tasks.find(keyword);
+        ui.showMatchingTasks(matchedTask);
     }
 
     /**
