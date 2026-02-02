@@ -19,7 +19,6 @@ public class Woody {
     private Ui ui;
     private TaskList tasks;
 
-    public Woody(String filePath) {
     public Woody() {
         storage = new Storage();
         ui = new Ui();
@@ -98,7 +97,6 @@ public class Woody {
         ui.showTaskRemoved(task, tasks.size());
     }
 
-    public void todo(String arguments) throws InvalidSyntaxException {
     public void todo(String arguments) {
         ToDo task = new ToDo(arguments);
         tasks.add(task);
