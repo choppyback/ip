@@ -42,19 +42,15 @@ public class Woody {
                 case "todo":
                     todo(arguments);
                     break;
-
                 case "deadline":
                     deadline(arguments);
                     break;
-
                 case "event":
                     event(arguments);
                     break;
-
                 case "mark":
                     mark(arguments);
                     break;
-
                 case "unmark":
                     unmark(arguments);
                     break;
@@ -63,6 +59,9 @@ public class Woody {
                     break;
                 case "list":
                     ui.showTaskList(tasks);
+                    break;
+                case "find":
+                    find(arguments);
                     break;
                 case "bye":
                     ui.showBye();
@@ -75,6 +74,11 @@ public class Woody {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    public void find(String keyword) {
+        TaskList matchedTask = tasks.find(keyword);
+        ui.showMatchingTasks(matchedTask);
     }
 
     public void mark(String arguments) throws InvalidSyntaxException { 
