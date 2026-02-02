@@ -100,7 +100,7 @@ public class Woody {
      * @param arguments User input containing task index
      * @throws InvalidSyntaxException If task index is invalid or does not exist
      */
-    public void mark(String arguments) throws InvalidSyntaxException { 
+    public void mark(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
         Task task = tasks.get(taskIndex);
         task.markDone();
