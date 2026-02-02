@@ -63,6 +63,11 @@ public class Task {
         }
     }
 
+    public boolean contains(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
+        return description.toLowerCase().contains(lowerKeyword);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description.trim();
