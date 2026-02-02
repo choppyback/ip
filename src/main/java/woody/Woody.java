@@ -76,6 +76,12 @@ public class Woody {
         }
     }
 
+    /**
+     * Finds tasks whose descriptions contain the given keyword
+     * and displays them to the user.
+     *
+     * @param keyword Keyword to search for.
+     */
     public void find(String keyword) {
         TaskList matchedTask = tasks.find(keyword);
         ui.showMatchingTasks(matchedTask);
