@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClass.set("woody.ui.Launcher")
+    mainClass.set("woody.ui.WoodyGuiLauncher")
 }
 
 shadowJar {
