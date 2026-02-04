@@ -1,5 +1,4 @@
 package woody.ui;
-import java.util.Scanner;
 
 import woody.task.Task;
 import woody.task.TaskList;
@@ -9,56 +8,6 @@ import woody.task.TaskList;
  * Responsible for displaying messages and reading user input.
  */
 public class Ui {
-    private Scanner scanner;
-
-    /**
-     * Constructs a Ui instance for reading user input from standard input.
-     */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Displays the application logo.
-     */
-    public void showLogo() {
-        String logo =
-                  "W       W   OOOO   OOOO   DDDDD   Y     Y\n"
-                + "W       W  O    O O    O  D    D   Y   Y \n"
-                + "W   W   W  O    O O    O  D     D    Y Y  \n"
-                + " W W W W   O    O O    O  D    D      Y   \n"
-                + "  W   W     OOOO   OOOO   DDDDD       Y   \n";
-
-        System.out.println("Hello from\n\n" + logo);
-        showLine();
-    }
-
-    /**
-     * Displays the line divider.
-     */
-    public void showLine() {
-        System.out.println("-----------------------");
-    }
-
-    /**
-     * Displays the welcome message when application starts.
-     */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Woody");
-        System.out.println("What can I do for you?\n");
-        showLine();
-    }
-
-    /**
-     * Reads a command entered by the user.
-     *
-     * @return The trimmed user input.
-     */
-    public String readCommand() {
-        System.out.print("You: ");
-        return scanner.nextLine().trim();
-    }
-
     /**
      * Displays the goodbye message when bye command is received.
      */
