@@ -4,8 +4,8 @@ import woody.task.Task;
 import woody.task.TaskList;
 
 /**
- * Handles all user interaction for the Woody application.
- * Responsible for displaying messages and reading user input.
+ * Handles user interaction for the Woody application.
+ * Provides formatted messages to be displayed to the user.
  */
 public class Ui {
     /**
@@ -69,9 +69,10 @@ public class Ui {
     }
 
     /**
-     * Displays all tasks currently in the task list.
+     * Returns a formatted list of all tasks in the task list.
      *
      * @param tasks The task list to be displayed.
+     * @return Formatted task list.
      */
     public String showTaskList(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
@@ -88,9 +89,10 @@ public class Ui {
     }
 
     /**
-     * Displays the list of tasks that match a search keyword.
+     * Returns a formatted list of tasks that match a search keyword.
      *
-     * @param tasks Task list containing the matching tasks.
+     * @param tasks Task list containing matching tasks.
+     * @return Formatted list of matching tasks.
      */
     public String showMatchingTasks(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
