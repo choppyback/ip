@@ -13,7 +13,8 @@ import javafx.util.Duration;
 import woody.Woody;
 
 /**
- * Controller for the main GUI.
+ * Controls the main GUI window of the Woody application.
+ * Handles user input and displays dialog interactions.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -30,19 +31,29 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window after the FXML file has been loaded.
+     * Binds the scroll pane to automatically scroll as dialog content grows.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /**
+     * Injects the Woody instance used to process user commands.
+     *
+     * @param w The Woody application instance.
+     */
     public void setWoody(Woody w) {
         woody = w;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input from the text field.
+     * Sends the input to the Woody application, displays the response,
+     * and clears the input field. Closes the window after a short delay
+     * if the user enters the bye command.
      */
     @FXML
     private void handleUserInput() {
