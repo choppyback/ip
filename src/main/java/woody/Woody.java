@@ -32,10 +32,12 @@ public class Woody {
     }
 
     /**
-     * Continuously reads and processes user commands until the 'bye'
-     * command is received.
+     * Processes a single user command and returns the response message.
+     * Any errors encountered during command processing are converted
+     * into user-friendly messages.
      *
-     * @throws WoodyException If an invalid or unknown command is entered.
+     * @param input The raw user input command.
+     * @return A response message to be displayed to the user.
      */
     public String run(String input) {
         try {
@@ -71,10 +73,10 @@ public class Woody {
     }
 
     /**
-     * Finds tasks whose descriptions contain the given keyword
-     * and displays them to the user.
+     * Finds tasks whose descriptions contain the given keyword.
      *
      * @param keyword Keyword to search for.
+     * @return A formatted list of matching tasks.
      */
     public String find(String keyword) {
         TaskList matchedTask = tasks.find(keyword);
@@ -82,10 +84,11 @@ public class Woody {
     }
 
     /**
-     * Marks a specified task as completed.
+     * Marks the specified task as completed.
      *
-     * @param arguments User input containing task index
-     * @throws InvalidSyntaxException If task index is invalid or does not exist
+     * @param arguments User input containing the task index.
+     * @return Confirmation message for the marked task.
+     * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
     public String mark(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
@@ -95,10 +98,11 @@ public class Woody {
     }
 
     /**
-     * Marks a specified task as not completed.
+     * Marks the specified task as not completed.
      *
      * @param arguments User input containing the task index.
-     * @throws InvalidSyntaxException If the task index is invalid or does not exist
+     * @return Confirmation message for the unmarked task.
+     * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
     public String unmark(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
@@ -108,10 +112,11 @@ public class Woody {
     }
 
     /**
-     * Removes a specified task from the task list
+     * Removes the specified task from the task list.
      *
      * @param arguments User input containing the task index.
-     * @throws InvalidSyntaxException If the task index is invalid or does not exist
+     * @return Confirmation message for the removed task.
+     * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
     public String remove(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
@@ -123,6 +128,7 @@ public class Woody {
      * Adds a new todo task to the task list.
      *
      * @param arguments Description of the todo task.
+     * @return Confirmation message for the added task.
      */
     public String todo(String arguments) {
         ToDo task = new ToDo(arguments);
@@ -134,6 +140,7 @@ public class Woody {
      * Adds a new deadline task to the task list.
      *
      * @param arguments Description and deadline of the task.
+     * @return Confirmation message for the added task.
      * @throws InvalidSyntaxException If the input format is invalid.
      */
     public String deadline(String arguments) throws InvalidSyntaxException {
@@ -146,9 +153,11 @@ public class Woody {
     /**
      * Adds a new event task to the task list.
      *
-     * @param arguments Description, from and to of the task.
+     * @param arguments Description, start time, and end time of the task.
+     * @return Confirmation message for the added task.
      * @throws InvalidSyntaxException If the input format is invalid.
      */
+
     public String event(String arguments) throws InvalidSyntaxException {
         String[] parsedArguments = Parser.getEventArguments(arguments);
         Event task = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
