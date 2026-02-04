@@ -167,8 +167,4 @@ public class Woody {
             tasks = new TaskList();
         }
     }
-
-    public static void main(String[] args) {
-        new Woody().run("");
-    }
 }
