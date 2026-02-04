@@ -62,10 +62,8 @@ public class Ui {
     /**
      * Displays the goodbye message when bye command is received.
      */
-    public void showBye() {
-        showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        showLine();
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -73,10 +71,8 @@ public class Ui {
      *
      * @param message Error message to be shown.
      */
-    public void showError(String message) {
-        showLine();
-        System.out.println(message);
-        showLine();
+    public String showError(String message) {
+        return message;
     }
 
     /**
@@ -85,12 +81,10 @@ public class Ui {
      * @param task The task that was added.
      * @param size The number of task in the list.
      */
-    public void showTaskAdded(Task task, int size) {
-        showLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showTaskAdded(Task task, int size) {
+        return "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -99,12 +93,10 @@ public class Ui {
      * @param task The task that was removed.
      * @param size The number of task in the list.
      */
-    public void showTaskRemoved(Task task, int size) {
-        showLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showTaskRemoved(Task task, int size) {
+        return "Noted. I've removed this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -112,11 +104,9 @@ public class Ui {
      *
      * @param task The task that was marked.
      */
-    public void showTaskMarked(Task task) {
-        showLine();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task);
-        showLine();
+    public String showTaskMarked(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + "  " + task;
     }
 
     /**
@@ -124,11 +114,9 @@ public class Ui {
      *
      * @param task The task that was unmarked.
      */
-    public void showTaskUnmarked(Task task) {
-        showLine();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("  " + task);
-        showLine();
+    public String showTaskUnmarked(Task task) {
+        return "OK, I've marked this task as not done yet:\n"
+                + "  " + task;
     }
 
     /**
@@ -136,13 +124,18 @@ public class Ui {
      *
      * @param tasks The task list to be displayed.
      */
-    public void showTaskList(TaskList tasks) {
-        showLine();
-        System.out.println("Here are the tasks in your list:");
+    public String showTaskList(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append(i + 1)
+                    .append(". ")
+                    .append(tasks.get(i))
+                    .append("\n");
         }
-        showLine();
+
+        return sb.toString().trim();
     }
 
     /**
@@ -150,12 +143,17 @@ public class Ui {
      *
      * @param tasks Task list containing the matching tasks.
      */
-    public void showMatchingTasks(TaskList tasks) {
-        showLine();
-        System.out.println("Here are the matching tasks in your list:");
+    public String showMatchingTasks(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append(i + 1)
+                    .append(". ")
+                    .append(tasks.get(i))
+                    .append("\n");
         }
-        showLine();
+
+        return sb.toString().trim();
     }
 }
