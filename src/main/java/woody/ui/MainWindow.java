@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Woody woody;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image buzzImage = new Image(this.getClass().getResourceAsStream("/images/buzz.png"));
+    private Image woodyImage = new Image(this.getClass().getResourceAsStream("/images/woody.png"));
 
     /**
      * Initializes the main window after the FXML file has been loaded.
@@ -60,8 +60,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = woody.run(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getWoodyDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, buzzImage),
+                DialogBox.getWoodyDialog(response, woodyImage)
         );
         userInput.clear();
         if (input.equals("bye")) {
