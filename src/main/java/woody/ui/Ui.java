@@ -9,6 +9,12 @@ import woody.task.TaskList;
  */
 public class Ui {
     /**
+     * Displays the application logo and welcome message.
+     */
+    public String showWelcome() {
+        return "Welcome to Woody: ";
+    }
+    /**
      * Displays the goodbye message when bye command is received.
      */
     public String showBye() {

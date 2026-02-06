@@ -47,6 +47,9 @@ public class MainWindow extends AnchorPane {
      */
     public void setWoody(Woody w) {
         woody = w;
+        dialogContainer.getChildren().add(
+                DialogBox.getWoodyDialog(woody.getWelcomeMessage(), woodyImage)
+        );
     }
 
     /**

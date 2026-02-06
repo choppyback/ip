@@ -176,4 +176,10 @@ public class Woody {
             tasks = new TaskList();
         }
     }
+    /**
+     * Returns the welcome message to be displayed
+     */
+    public String getWelcomeMessage() {
+        return ui.showWelcome();
+    }
 }
