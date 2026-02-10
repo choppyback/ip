@@ -89,22 +89,22 @@ public class TaskList {
     }
 
     /**
-     * Returns true if the given event clashes with any existing event
-     * in the task list.
+     * Returns an existing event that clashes with the given event,
+     * or null if no such event exists.
      *
      * @param newEvent The event to be checked for clashes.
-     * @return True if a clashing event exists.
+     * @return A clashing event if found, otherwise null.
      */
-    public boolean hasClashingEvent(Event newEvent) {
+    public Event findClashingEvent(Event newEvent) {
         for (Task task : tasks) {
             if (!(task instanceof Event)) {
                 continue;
             }
             Event existingEvent = (Event) task;
             if (existingEvent.clashesWith(newEvent)) {
-                return true;
+                return existingEvent;
             }
         }
-        return false;
+        return null;
     }
 }

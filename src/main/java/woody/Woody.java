@@ -164,8 +164,9 @@ public class Woody {
         String[] parsedArguments = Parser.getEventArguments(arguments);
         assert parsedArguments.length == 3 : "Event arguments should have exactly 3 parts";
         Event newEvent = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
-        if (tasks.hasClashingEvent(newEvent)) {
-            return "There is a clashing event, task not added";
+        Event clashingEvent = tasks.findClashingEvent(newEvent);
+        if (clashingEvent != null) {
+            return ui.showClashingTask(clashingEvent);
         }
         tasks.add(newEvent);
         return ui.showTaskAdded(newEvent, tasks.size());

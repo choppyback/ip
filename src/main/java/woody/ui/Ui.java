@@ -98,6 +98,11 @@ public class Ui {
                 + formatTaskList(tasks);
     }
 
+    public String showClashingTask(Task task) {
+        return "Task not added, clashes with:\n"
+                + "  " + task;
+    }
+
     /**
      * Formats the given task list into a numbered string representation.
      *
