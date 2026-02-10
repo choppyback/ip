@@ -40,9 +40,11 @@ public class Woody {
      * @return A response message to be displayed to the user.
      */
     public String run(String input) {
+        assert tasks != null : "TaskList should have been initialized";
         try {
             String command = Parser.getCommand(input);
             String arguments = Parser.getArguments(input);
+            assert command != null : "Parser returned null command";
 
             switch (command) {
             case "todo":
@@ -92,6 +94,7 @@ public class Woody {
      */
     public String mark(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
+        assert taskIndex >= 0 : "Task index should never be negative";
         Task task = tasks.get(taskIndex);
         task.markDone();
         return ui.showTaskMarked(task);
@@ -106,6 +109,7 @@ public class Woody {
      */
     public String unmark(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
+        assert taskIndex >= 0 : "Task index should never be negative";
         Task task = tasks.get(taskIndex);
         task.unmarkDone();
         return ui.showTaskUnmarked(task);
@@ -145,6 +149,7 @@ public class Woody {
      */
     public String deadline(String arguments) throws InvalidSyntaxException {
         String[] parsedArguments = Parser.getDeadlineArguments(arguments);
+        assert parsedArguments.length == 2 : "Deadline arguments should have exactly 2 parts";
         Deadline task = new Deadline(parsedArguments[0], parsedArguments[1]);
         tasks.add(task);
         return ui.showTaskAdded(task, tasks.size());
@@ -160,6 +165,7 @@ public class Woody {
 
     public String event(String arguments) throws InvalidSyntaxException {
         String[] parsedArguments = Parser.getEventArguments(arguments);
+        assert parsedArguments.length == 3 : "Event arguments should have exactly 3 parts";
         Event task = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
         tasks.add(task);
         return ui.showTaskAdded(task, tasks.size());
