@@ -24,14 +24,14 @@ public class Storage {
      *
      * @throws IOException If an I/O error occurs while creating the directory or file.
      */
-    public static void ensureFileExist() throws IOException {
+    public static void ensureFileExists() throws IOException {
         File dir = new File(DIR);
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
 
         File file = new File(FILE_PATH);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.createNewFile();
         }
     }
@@ -43,7 +43,7 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) {
         try {
-            ensureFileExist();
+            ensureFileExists();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
                 for (Task task : tasks) {
                     writer.write(task.toFileString());
@@ -62,11 +62,9 @@ public class Storage {
      * @throws IOException If an I/O error occurs while reading the file.
      */
     public ArrayList<Task> load() throws IOException {
-        ensureFileExist();
+        ensureFileExists();
         Path filePath = Paths.get(FILE_PATH);
-
         ArrayList<Task> list = new ArrayList<>();
-    
         List<String> lines = Files.readAllLines(filePath);
         for (String line : lines) {
             Task task = Task.fileToTask(line);
