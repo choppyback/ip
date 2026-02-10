@@ -34,6 +34,17 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Returns true if this event clashes with the given event.
+     *
+     * @param other The other event to check against.
+     * @return True if the two events overlap in time.
+     */
+    public boolean clashesWith(Event other) {
+        return this.from.isBefore(other.to)
+                && other.from.isBefore(this.to);
+    }
+
     @Override
     public String toFileString() {
         return String.format("E %s | %s | %s", super.toFileString(), from, to);
