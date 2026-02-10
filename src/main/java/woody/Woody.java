@@ -163,9 +163,12 @@ public class Woody {
     public String event(String arguments) throws InvalidSyntaxException {
         String[] parsedArguments = Parser.getEventArguments(arguments);
         assert parsedArguments.length == 3 : "Event arguments should have exactly 3 parts";
-        Event task = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
-        tasks.add(task);
-        return ui.showTaskAdded(task, tasks.size());
+        Event newEvent = new Event(parsedArguments[0], parsedArguments[1], parsedArguments[2]);
+        if (tasks.hasClashingEvent(newEvent)) {
+            return "There is a clashing event, task not added";
+        }
+        tasks.add(newEvent);
+        return ui.showTaskAdded(newEvent, tasks.size());
     }
 
     /**

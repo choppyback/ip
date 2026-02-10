@@ -81,10 +81,30 @@ public class TaskList {
     public TaskList find(String keyword) {
         TaskList results = new TaskList();
         for (Task task : tasks) {
-            if(task.contains(keyword)) {
+            if (task.contains(keyword)) {
                 results.add(task);
             }
         }
         return results;
+    }
+
+    /**
+     * Returns true if the given event clashes with any existing event
+     * in the task list.
+     *
+     * @param newEvent The event to be checked for clashes.
+     * @return True if a clashing event exists.
+     */
+    public boolean hasClashingEvent(Event newEvent) {
+        for (Task task : tasks) {
+            if (!(task instanceof Event)) {
+                continue;
+            }
+            Event existingEvent = (Event) task;
+            if (existingEvent.clashesWith(newEvent)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
