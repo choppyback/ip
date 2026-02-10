@@ -81,17 +81,9 @@ public class Ui {
      * @return Formatted task list.
      */
     public String showTaskList(TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n");
-
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1)
-                    .append(". ")
-                    .append(tasks.get(i))
-                    .append("\n");
-        }
-
-        return sb.toString().trim();
+        return "Here are the tasks in your list:"
+                + System.lineSeparator()
+                + formatTaskList(tasks);
     }
 
     /**
@@ -101,16 +93,31 @@ public class Ui {
      * @return Formatted list of matching tasks.
      */
     public String showMatchingTasks(TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
+        return "Here are the matching tasks in your list:"
+                + System.lineSeparator()
+                + formatTaskList(tasks);
+    }
+
+    /**
+     * Formats the given task list into a numbered string representation.
+     *
+     * Each task is displayed on its own line, prefixed with a 1-based index.
+     * This method is used to construct user-facing messages for displaying
+     * task lists.
+     *
+     * @param tasks The task list to be formatted.
+     * @return A string containing the formatted task list.
+     */
+    private String formatTaskList(TaskList tasks) {
+        StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1)
+            output.append(i + 1)
                     .append(". ")
                     .append(tasks.get(i))
                     .append("\n");
         }
 
-        return sb.toString().trim();
+        return output.toString();
     }
 }

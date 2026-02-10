@@ -22,6 +22,7 @@ public class Woody {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+
     /**
      * Constructs a new Woody application instance.
      */
@@ -93,9 +94,8 @@ public class Woody {
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
     public String mark(String arguments) throws InvalidSyntaxException {
-        int taskIndex = Parser.getTaskIndex(arguments);
+        Task task = getTaskFromArguments(arguments);
         assert taskIndex >= 0 : "Task index should never be negative";
-        Task task = tasks.get(taskIndex);
         task.markDone();
         return ui.showTaskMarked(task);
     }
@@ -108,9 +108,8 @@ public class Woody {
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
     public String unmark(String arguments) throws InvalidSyntaxException {
-        int taskIndex = Parser.getTaskIndex(arguments);
+        Task task = getTaskFromArguments(arguments);
         assert taskIndex >= 0 : "Task index should never be negative";
-        Task task = tasks.get(taskIndex);
         task.unmarkDone();
         return ui.showTaskUnmarked(task);
     }
@@ -162,7 +161,6 @@ public class Woody {
      * @return Confirmation message for the added task.
      * @throws InvalidSyntaxException If the input format is invalid.
      */
-
     public String event(String arguments) throws InvalidSyntaxException {
         String[] parsedArguments = Parser.getEventArguments(arguments);
         assert parsedArguments.length == 3 : "Event arguments should have exactly 3 parts";
@@ -182,10 +180,23 @@ public class Woody {
             tasks = new TaskList();
         }
     }
+
     /**
      * Returns the welcome message to be displayed
      */
     public String getWelcomeMessage() {
         return ui.showWelcome();
+    }
+
+    /**
+     * Retrieves a task from the task list based on the given user input.
+     *
+     * @param arguments User input containing the task index.
+     * @return The task corresponding to the given index.
+     * @throws InvalidSyntaxException If the task index is invalid or does not exist.
+     */
+    private Task getTaskFromArguments(String arguments) throws InvalidSyntaxException {
+        int taskIndex = Parser.getTaskIndex(arguments);
+        return tasks.get(taskIndex);
     }
 }

@@ -17,6 +17,7 @@ import woody.Woody;
  * Handles user input and displays dialog interactions.
  */
 public class MainWindow extends AnchorPane {
+    private static final int EXIT_DELAY_SECONDS = 3;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -68,7 +69,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3.0));
+            PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_DELAY_SECONDS));
             delay.setOnFinished(event -> {
                 Stage stage = (Stage) userInput.getScene().getWindow();
                 stage.close();
