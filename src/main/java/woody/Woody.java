@@ -95,7 +95,7 @@ public class Woody {
      */
     public String mark(String arguments) throws InvalidSyntaxException {
         Task task = getTaskFromArguments(arguments);
-        assert taskIndex >= 0 : "Task index should never be negative";
+
         task.markDone();
         return ui.showTaskMarked(task);
     }
@@ -109,7 +109,6 @@ public class Woody {
      */
     public String unmark(String arguments) throws InvalidSyntaxException {
         Task task = getTaskFromArguments(arguments);
-        assert taskIndex >= 0 : "Task index should never be negative";
         task.unmarkDone();
         return ui.showTaskUnmarked(task);
     }
@@ -197,6 +196,7 @@ public class Woody {
      */
     private Task getTaskFromArguments(String arguments) throws InvalidSyntaxException {
         int taskIndex = Parser.getTaskIndex(arguments);
+        assert taskIndex >= 0 : "Task index should never be negative";
         return tasks.get(taskIndex);
     }
 }
