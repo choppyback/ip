@@ -9,10 +9,16 @@ import woody.task.TaskList;
  */
 public class Ui {
     /**
-     * Returns the application logo and welcome message.
+     * Returns the welcome message for the application.
+     * Includes a startup error message if one exists.
+     *
+     * @param startUpErrorMessage Error message from startup, or null if none.
      */
-    public String showWelcome() {
-        return "Welcome to Woody: ";
+    public String showWelcome(String startUpErrorMessage) {
+        if (startUpErrorMessage == null) {
+            return "Welcome to Woody!";
+        }
+        return "Welcome to Woody!\n⚠ " + startUpErrorMessage;
     }
     /**
      * Returns the goodbye message when bye command is received.

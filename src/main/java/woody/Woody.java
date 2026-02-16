@@ -1,8 +1,7 @@
 package woody;
 
-import java.io.IOException;
-
 import woody.exception.InvalidSyntaxException;
+import woody.exception.StorageException;
 import woody.exception.UnknownCommandException;
 import woody.exception.WoodyException;
 import woody.parser.Parser;
@@ -22,6 +21,7 @@ public class Woody {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private String startUpErrorMessage;
 
     /**
      * Constructs a new Woody application instance.
@@ -179,16 +179,18 @@ public class Woody {
     public void loadTask() {
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (StorageException e) {
             tasks = new TaskList();
+            startUpErrorMessage = e.getMessage();
         }
     }
 
     /**
-     * Returns the welcome message to be displayed
+     * Returns the welcome message to be displayed.
+     * Includes any startup error message if present.
      */
     public String getWelcomeMessage() {
-        return ui.showWelcome();
+        return ui.showWelcome(startUpErrorMessage);
     }
 
     /**
