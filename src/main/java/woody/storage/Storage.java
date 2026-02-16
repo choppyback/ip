@@ -25,7 +25,7 @@ public class Storage {
      *
      * @throws IOException If an I/O error occurs while creating the directory or file.
      */
-    public static void ensureFileExists() throws IOException {
+    public void ensureFileExists() throws IOException {
         File dir = new File(DIR);
         if (!dir.exists()) {
             dir.mkdir();
@@ -61,20 +61,25 @@ public class Storage {
      * Loads tasks from the storage file.
      *
      * @return List of tasks loaded from storage.
-     * @throws IOException If an I/O error occurs while reading the file.
+     * @throws StorageException If the file exists but cannot be read.
      */
-    public ArrayList<Task> load() throws IOException {
-        ensureFileExists();
-        Path filePath = Paths.get(FILE_PATH);
-        ArrayList<Task> list = new ArrayList<>();
-        List<String> lines = Files.readAllLines(filePath);
-        for (String line : lines) {
-            Task task = Task.fileToTask(line);
-            if (task != null) {
-                list.add(task);
+    public ArrayList<Task> load() throws StorageException {
+        try {
+            ensureFileExists();
+            Path filePath = Paths.get(FILE_PATH);
+            ArrayList<Task> list = new ArrayList<>();
+            List<String> lines = Files.readAllLines(filePath);
+            for (String line : lines) {
+                Task task = Task.fileToTask(line);
+                if (task != null) {
+                    list.add(task);
+                }
             }
+            return list;
+
+        } catch (IOException e) {
+            throw new StorageException("Failed to load tasks from file.");
         }
-        return list;
     }
 
 }
