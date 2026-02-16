@@ -1,4 +1,6 @@
 package woody.task;
+import woody.exception.InvalidTaskIndexException;
+
 import java.util.ArrayList;
 
 /**
@@ -44,12 +46,12 @@ public class TaskList {
     }
 
     /**
-     * Removes and returns the task at the specified index.
+     * Deletes and returns the task at the specified index.
      *
-     * @param index Index of the task to remove.
-     * @return The removed task.
+     * @param index Index of the task to delete.
+     * @return The deleted task.
      */
-    public Task remove(int index) {
+    public Task delete(int index) {
         return tasks.remove(index);
     }
 
@@ -106,5 +108,18 @@ public class TaskList {
             }
         }
         return null;
+    }
+
+    /**
+     * Validates that the given index is within the range
+     * of existing tasks.
+     *
+     * @param index Zero-based task index.
+     * @throws InvalidTaskIndexException If the index is invalid.
+     */
+    public void validateIndex(int index) throws InvalidTaskIndexException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidTaskIndexException(tasks.size());
+        }
     }
 }

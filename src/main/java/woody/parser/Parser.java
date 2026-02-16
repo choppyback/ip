@@ -14,27 +14,25 @@ public class Parser {
 
     public static int getTaskIndex(String arg) throws InvalidSyntaxException {
         if (arg.isBlank()) {
-            throw new InvalidSyntaxException();
+            throw new InvalidSyntaxException("Command cannot be empty.");
         }
-        int index;
         try {
-            index = Integer.parseInt(arg) - 1;
+            return Integer.parseInt(arg) - 1;
         } catch (NumberFormatException e) {
-            throw new InvalidSyntaxException();
+            throw new InvalidSyntaxException("Index must be a number.");
         }
-        return index;
     }
 
     public static String[] getDeadlineArguments(String args) throws InvalidSyntaxException {
         if (!args.contains("/by")) {
-            throw new InvalidSyntaxException();
+            throw new InvalidSyntaxException("Deadline must be in format: deadline <desc> /by <date>.");
         }
         return args.split("/by ", 2);
     }
 
     public static String[] getEventArguments(String args) throws InvalidSyntaxException {
         if (!args.contains("/from") || !args.contains("/to")) {
-            throw new InvalidSyntaxException();
+            throw new InvalidSyntaxException("Event must be in format: event <desc> /from <start> /to <end>.");
         }
         String[] first = args.split("/from", 2);
         String[] second = first[1].split("/to", 2);

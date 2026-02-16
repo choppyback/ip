@@ -1,9 +1,6 @@
 package woody;
 
-import woody.exception.InvalidSyntaxException;
-import woody.exception.StorageException;
-import woody.exception.UnknownCommandException;
-import woody.exception.WoodyException;
+import woody.exception.*;
 import woody.parser.Parser;
 import woody.storage.Storage;
 import woody.task.Deadline;
@@ -59,7 +56,7 @@ public class Woody {
             case "unmark":
                 return unmark(arguments);
             case "delete":
-                return remove(arguments);
+                return delete(arguments);
             case "list":
                 return ui.showTaskList(tasks);
             case "find":
@@ -93,9 +90,8 @@ public class Woody {
      * @return Confirmation message for the marked task.
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
-    public String mark(String arguments) throws InvalidSyntaxException {
+    public String mark(String arguments) throws InvalidSyntaxException, InvalidTaskIndexException {
         Task task = getTaskFromArguments(arguments);
-
         task.markDone();
         return ui.showTaskMarked(task);
     }
@@ -107,22 +103,23 @@ public class Woody {
      * @return Confirmation message for the unmarked task.
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
-    public String unmark(String arguments) throws InvalidSyntaxException {
+    public String unmark(String arguments) throws InvalidSyntaxException, InvalidTaskIndexException {
         Task task = getTaskFromArguments(arguments);
         task.unmarkDone();
         return ui.showTaskUnmarked(task);
     }
 
     /**
-     * Removes the specified task from the task list.
+     * Deletes the specified task from the task list.
      *
      * @param arguments User input containing the task index.
      * @return Confirmation message for the removed task.
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
-    public String remove(String arguments) throws InvalidSyntaxException {
+    public String delete(String arguments) throws InvalidSyntaxException, InvalidTaskIndexException {
         int taskIndex = Parser.getTaskIndex(arguments);
-        Task task = tasks.remove(taskIndex);
+        tasks.validateIndex(taskIndex);
+        Task task = tasks.delete(taskIndex);
         return ui.showTaskRemoved(task, tasks.size());
     }
 
@@ -131,8 +128,12 @@ public class Woody {
      *
      * @param arguments Description of the todo task.
      * @return Confirmation message for the added task.
+     * @throws InvalidSyntaxException If the description is null or empty.
      */
-    public String todo(String arguments) {
+    public String todo(String arguments) throws InvalidSyntaxException {
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new InvalidSyntaxException("The description of a todo cannot be empty.");
+        }
         ToDo task = new ToDo(arguments);
         tasks.add(task);
         return ui.showTaskAdded(task, tasks.size());
@@ -200,9 +201,9 @@ public class Woody {
      * @return The task corresponding to the given index.
      * @throws InvalidSyntaxException If the task index is invalid or does not exist.
      */
-    private Task getTaskFromArguments(String arguments) throws InvalidSyntaxException {
+    private Task getTaskFromArguments(String arguments) throws InvalidSyntaxException, InvalidTaskIndexException {
         int taskIndex = Parser.getTaskIndex(arguments);
-        assert taskIndex >= 0 : "Task index should never be negative";
+        tasks.validateIndex(taskIndex);
         return tasks.get(taskIndex);
     }
 }
