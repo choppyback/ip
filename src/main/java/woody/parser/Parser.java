@@ -2,7 +2,6 @@ package woody.parser;
 
 import woody.exception.InvalidSyntaxException;
 
-
 public class Parser {
     public static String getCommand(String input) {
         return input.trim().split(" ", 2)[0];
