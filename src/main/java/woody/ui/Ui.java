@@ -33,7 +33,7 @@ public class Ui {
      * @param message Error message to be shown.
      */
     public String showError(String message) {
-        return message;
+        return "⚠ " + message;
     }
 
     /**
