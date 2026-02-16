@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import woody.exception.StorageException;
 import woody.task.Task;
 
 /**
@@ -40,8 +41,9 @@ public class Storage {
      * Saves the given list of tasks to the storage file.
      *
      * @param tasks List of tasks to be saved.
+     * @throws StorageException If an error occurs while writing to the file.
      */
-    public void save(ArrayList<Task> tasks) {
+    public void save(ArrayList<Task> tasks) throws StorageException {
         try {
             ensureFileExists();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
@@ -51,7 +53,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error saving file");
+            throw new StorageException("Failed to save tasks to file.");
         }
     }
 
