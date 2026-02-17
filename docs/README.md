@@ -3,13 +3,33 @@
 Woody is a lightweight task manager that helps you track todos, deadlines, and events.
 You interact with it using short commands and get responses in a chat-style interface.
 
+---
+
+## Table of contents
+
+- [Quick start](#quick-start)
+- [Data storage](#data-storage)
+- [Command summary](#command-summary)
+- [Features](#features)
+  - [Listing tasks: `list`](#listing-tasks)
+  - [Adding a todo: `todo`](#adding-a-todo)
+  - [Adding a deadline: `deadline`](#adding-a-deadline)
+  - [Adding an event: `event`](#adding-an-event)
+  - [Marking a task: `mark`](#marking-a-task)
+  - [Unmarking a task: `unmark`](#unmarking-a-task)
+  - [Deleting a task: `delete`](#deleting-a-task)
+  - [Finding tasks: `find`](#finding-tasks)
+  - [Exiting the app: `bye`](#exiting)
+
+---
+
 ## Quick start
 
 1. Prerequisites: ensure you have Java 17 or above installed.
    ```
    java -version
    ```
-2. Download the latest `woody.jar` from GitHub Releases.
+2. Download the latest `woody.jar` from [here](https://github.com/choppyback/ip/releases).
 3. Run the app:
    ```
    java -jar woody.jar
@@ -20,22 +40,37 @@ You interact with it using short commands and get responses in a chat-style inte
    deadline report /by 20/4/1993 1900
    list
    ```
+---
+
+## Data storage
+
+Woody saves tasks to `data/woody.txt` (relative to where you run the app) upon 'bye' command.
+
+If the file does not exist, Woody creates it on first save.
+When Woody starts, it loads existing tasks from this same file.
+---
 
 ## Command summary
 
-- `list` shows all tasks
-- `todo <description>` adds a todo
-- `deadline <description> /by <date/time>` adds a deadline
-- `event <description> /from <start> /to <end>` adds an event
-- `mark <index>` marks a task as done
-- `unmark <index>` marks a task as not done
-- `delete <index>` removes a task
-- `find <keyword>` lists tasks that contain the keyword
-- `bye` exits the app
+| Command | What it does |
+| --- | --- |
+| `list` | Shows all tasks. |
+| `todo <description>` | Adds a todo. |
+| `deadline <description> /by <date/time>` | Adds a deadline. |
+| `event <description> /from <start> /to <end>` | Adds an event. |
+| `mark <index>` | Marks a task as done. |
+| `unmark <index>` | Marks a task as not done. |
+| `delete <index>` | Removes a task. |
+| `find <keyword>` | Lists tasks that contain the keyword. |
+| `bye` | Exits the app. |
 
-## Listing tasks
+---
 
-Example: `list`
+## Features
+
+### Listing tasks
+
+Format: `list`
 
 Expected outcome:
 ```
@@ -44,7 +79,13 @@ Here are the tasks in your list:
 2. [D][X] submit report (by: 20 Apr 1993 19:00)
 ```
 
-## Adding a todo
+Example output screenshot:
+![List command sample output](images/list.png)
+
+
+### Adding a todo
+
+Format: `todo <description>`
 
 Example: `todo buy groceries`
 
@@ -55,9 +96,14 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-## Adding a deadline
+Example output screenshot:
+![Todo command sample output](images/todo.png)
+
+### Adding a deadline
 
 Use this when you need a task that must be completed by a specific time.
+
+Format: `deadline <description> /by <date/time>`
 
 Example: `deadline submit report /by 20/4/1993 1900`
 
@@ -68,7 +114,12 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-## Adding an event
+Example output screenshot:
+![Deadline command sample output](images/deadline.png)
+
+### Adding an event
+
+Format: `event <description> /from <start> /to <end>`
 
 Example: `event team sync /from 21/4/1993 1400 /to 21/4/1993 1500`
 
@@ -79,7 +130,12 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-## Marking a task
+Example output screenshot:
+![Event command sample output](images/event.png)
+
+### Marking a task
+
+Format: `mark <index>`
 
 Example: `mark 2`
 
@@ -89,7 +145,12 @@ Nice! I've marked this task as done:
   [D][X] submit report (by: 20 Apr 1993 19:00)
 ```
 
-## Unmarking a task
+Example output screenshot:
+![Mark command sample output](images/mark.png)
+
+### Unmarking a task
+
+Format: `unmark <index>`
 
 Example: `unmark 2`
 
@@ -99,7 +160,12 @@ OK, I've marked this task as not done yet:
   [D][ ] submit report (by: 20 Apr 1993 19:00)
 ```
 
-## Deleting a task
+Example output screenshot:
+![Unmark command sample output](images/unmark.png)
+
+### Deleting a task
+
+Format: `delete <index>`
 
 Example: `delete 1`
 
@@ -110,7 +176,12 @@ Noted. I've removed this task:
 Now you have 1 tasks in the list.
 ```
 
-## Finding tasks
+Example output screenshot:
+![Delete command sample output](images/delete.png)
+
+### Finding tasks
+
+Format: `find <keyword>`
 
 Example: `find report`
 
@@ -120,11 +191,21 @@ Here are the matching tasks in your list:
 1. [D][ ] submit report (by: 20 Apr 1993 19:00)
 ```
 
-## Exiting
+Example output screenshot:
+![Find command sample output](images/find.png)
 
-Example: `bye`
+### Exiting
+
+Format: `bye`
 
 Expected outcome:
 ```
 Bye. Hope to see you again soon!
 ```
+
+Example output screenshot:
+![Bye command sample output](images/bye.png)
+
+---
+
+## FAQ
