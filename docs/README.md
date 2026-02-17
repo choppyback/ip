@@ -3,8 +3,6 @@
 Woody is a lightweight task manager that helps you track todos, deadlines, and events.
 You interact with it using short commands and get responses in a chat-style interface.
 
----
-
 ## Table of contents
 
 - [Quick start](#quick-start)
@@ -20,8 +18,6 @@ You interact with it using short commands and get responses in a chat-style inte
   - [Deleting a task: `delete`](#deleting-a-task)
   - [Finding tasks: `find`](#finding-tasks)
   - [Exiting the app: `bye`](#exiting)
-
----
 
 ## Quick start
 
@@ -40,15 +36,12 @@ You interact with it using short commands and get responses in a chat-style inte
    deadline report /by 20/4/1993 1900
    list
    ```
----
 
 ## Data storage
 
 Woody saves tasks to `data/woody.txt` (relative to where you run the app) upon 'bye' command.
 
-If the file does not exist, Woody creates it on first save.
-When Woody starts, it loads existing tasks from this same file.
----
+If the file does not exist, Woody creates it on first save. When Woody starts, it loads existing tasks from this same file.
 
 ## Command summary
 
@@ -80,8 +73,8 @@ Here are the tasks in your list:
 ```
 
 Example output screenshot:
-![List command sample output](images/list.png)
 
+![List command sample output](images/list.png)
 
 ### Adding a todo
 
@@ -97,6 +90,7 @@ Now you have 1 tasks in the list.
 ```
 
 Example output screenshot:
+
 ![Todo command sample output](images/todo.png)
 
 ### Adding a deadline
@@ -115,6 +109,7 @@ Now you have 1 tasks in the list.
 ```
 
 Example output screenshot:
+
 ![Deadline command sample output](images/deadline.png)
 
 ### Adding an event
@@ -131,6 +126,7 @@ Now you have 1 tasks in the list.
 ```
 
 Example output screenshot:
+
 ![Event command sample output](images/event.png)
 
 ### Marking a task
@@ -146,6 +142,7 @@ Nice! I've marked this task as done:
 ```
 
 Example output screenshot:
+
 ![Mark command sample output](images/mark.png)
 
 ### Unmarking a task
@@ -161,6 +158,7 @@ OK, I've marked this task as not done yet:
 ```
 
 Example output screenshot:
+
 ![Unmark command sample output](images/unmark.png)
 
 ### Deleting a task
@@ -177,6 +175,7 @@ Now you have 1 tasks in the list.
 ```
 
 Example output screenshot:
+
 ![Delete command sample output](images/delete.png)
 
 ### Finding tasks
@@ -192,6 +191,7 @@ Here are the matching tasks in your list:
 ```
 
 Example output screenshot:
+
 ![Find command sample output](images/find.png)
 
 ### Exiting
@@ -204,8 +204,5 @@ Bye. Hope to see you again soon!
 ```
 
 Example output screenshot:
+
 ![Bye command sample output](images/bye.png)
-
----
-
-## FAQ
