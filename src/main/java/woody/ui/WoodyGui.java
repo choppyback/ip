@@ -24,6 +24,7 @@ public class WoodyGui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setWoody(woody);
+            stage.setTitle("Woody");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
