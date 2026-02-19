@@ -117,6 +117,9 @@ Format: `event <description> /from <start> /to <end>`
 
 Example: `event team sync /from 21/4/1993 1400 /to 21/4/1993 1500`
 
+Note: Woody prevents overlapping schedules. If the new event clashes with an existing event, it will not be added, and Woody will show:
+`Task not added, clashes with: ...`
+
 Expected outcome:
 ```
 Got it. I've added this task:
@@ -208,20 +211,23 @@ Example output screenshot:
 
 ## Common errors
 
-Woody shows user input errors with a `⚠` prefix.  
+Woody shows command/input errors with a `⚠` prefix.  
 Example: `⚠ Index must be a number.`
 
 | What happened | Message shown by Woody | How to fix |
 | --- | --- | --- |
-| Unknown command | `⚠ Unknown command: "<your input>".` (followed by the list of valid commands) | Use one of: `todo`, `deadline`, `event`, `mark`, `unmark`, `delete`, `list`, `find`, `bye`. |
+| Unknown command | `⚠ Unknown command: "<your input>".` followed by:<br>`Try one of the following commands:`<br>`todo \| deadline \| event \| mark \| unmark \| delete \| list \| find \| bye` | Use one of the listed commands. |
 | Missing todo description | `⚠ The description of a todo cannot be empty.` | Provide text after `todo`. |
 | Missing index for `mark`, `unmark`, or `delete` | `⚠ Command cannot be empty.` | Enter a task number, e.g. `mark 2`. |
 | Non-numeric index for `mark`, `unmark`, or `delete` | `⚠ Index must be a number.` | Use only digits for the task number. |
 | Task number out of range | `⚠ Task number must be between 1 and <n>.` | Use a number shown in `list`. |
-| Invalid deadline format | `⚠ Deadline must be in format: deadline <desc> /by <date>.` | Include `/by`, e.g. `deadline submit report /by 20/4/1993 1900`. |
-| Invalid event format | `⚠ Event must be in format: event <desc> /from <start> /to <end>.` | Include both `/from` and `/to`. |
+| Deadline missing `/by` | `⚠ Deadline must be in format: deadline <desc> /by <date>.` | Include `/by`, e.g. `deadline submit report /by 20/4/1993 1900`. |
+| Deadline date/time not parseable | `⚠ Deadline must be in format: dd-MM-yyyy HHmm` | Use a valid date/time, e.g. `20/4/1993 1900`. |
+| Event missing `/from` or `/to` | `⚠ Event must be in format: event <desc> /from <start> /to <end>.` | Include both `/from` and `/to`. |
+| Event date/time not parseable | `⚠ Event must be in format: event <desc> /from dd-MM-yyyy HHmm /to dd-MM-yyyy HHmm` | Use valid date/time values, e.g. `21/4/1993 1400`. |
+| Event end time before start time | `⚠ Event end time cannot be before start time.` | Ensure end time is the same as or after start time. |
 | Startup/load storage issue | `Welcome to Woody!` then `⚠ Failed to load tasks from file.` | Check file permissions/path for `data/woody.txt`, then restart Woody. |
 | Save storage issue on `bye` | `⚠ Failed to save tasks to file.` | Check file permissions/path for `data/woody.txt`, then run `bye` again. |
 
-Note: if a new `event` overlaps an existing event, Woody shows:
+Note: event clashes are reported without the `⚠` prefix:
 `Task not added, clashes with: ...`
