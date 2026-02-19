@@ -1,26 +1,62 @@
-# Duke project template
+# Woody
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Woody is a JavaFX-based task management chatbot built for fast, text-driven personal planning.  
+It supports core task workflows across todos, deadlines, and events, with persistent local storage and a clean conversational interface.
 
-## Setting up in Intellij
+![Woody UI](docs/Ui.png)
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## Overview
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+The project is structured around clear separation of concerns:
+- parsing and input validation
+- domain task models and list management
+- storage and file persistence
+- UI rendering and interaction flow
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+This keeps feature logic focused, testable, and easy to extend.
+
+## Technical Highlights
+
+- `Java 17` + `JavaFX` desktop GUI
+- Gradle-based build and packaging
+- Persistent storage at `data/woody.txt`
+- Error handling with applicaiton-specific exceptions
+- Modular package design for maintainability
+
+## Project Structure
+
+```text
+src/
+├─ main/
+│  ├─ java/
+│  │  └─ woody/
+│  │     ├─ parser/      # Input parsing and syntax handling
+│  │     ├─ storage/     # Local file read/write logic
+│  │     ├─ task/        # Task models and task list behavior
+│  │     ├─ ui/          # JavaFX UI and presentation flow
+│  │     └─ exception/   # Application-specific exception types
+│  └─ resources/
+│     ├─ view/           # FXML layouts
+│     ├─ css/            # UI styling
+│     └─ images/         # UI assets
+└─ test/
+   └─ java/
+      └─ woody/
+         ├─ task/        # Task and task-list tests
+         └─ parser/      # Parser tests
+```
+
+## Build and Run
+
+```bash
+./gradlew run
+./gradlew test
+./gradlew shadowJar
+```
+
+The packaged executable is generated at `build/libs/woody.jar`.
+
+## Documentation
+
+- User guide: `docs/README.md`
+- Developer notes: `AI.md`
