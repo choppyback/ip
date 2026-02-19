@@ -1,6 +1,10 @@
 package woody;
 
-import woody.exception.*;
+import woody.exception.InvalidSyntaxException;
+import woody.exception.InvalidTaskIndexException;
+import woody.exception.StorageException;
+import woody.exception.UnknownCommandException;
+import woody.exception.WoodyException;
 import woody.parser.Parser;
 import woody.storage.Storage;
 import woody.task.Deadline;
@@ -62,14 +66,30 @@ public class Woody {
             case "find":
                 return find(arguments);
             case "bye":
-                storage.save(tasks.getTasks());
-                return ui.showBye();
+                return handleExit();
             default:
                 throw new UnknownCommandException(input);
             }
         } catch (WoodyException e) {
             return ui.showError(e.getMessage());
         }
+    }
+
+    /**
+     * Saves tasks and returns the goodbye message.
+     *
+     * @return Goodbye message if save succeeds.
+     * @throws StorageException If saving fails.
+     */
+    private String handleExit() throws StorageException {
+        try {
+            storage.save(tasks.getTasks());
+        } catch (StorageException e) {
+            throw new StorageException(
+                    "Unable to save data. Please check file permissions "
+                            + "and try again.");
+        }
+        return ui.showBye();
     }
 
     /**

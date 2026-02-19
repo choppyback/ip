@@ -68,7 +68,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getWoodyDialog(response, woodyImage)
         );
         userInput.clear();
-        if (input.equals("bye")) {
+        if (response.equals("Bye. Hope to see you again soon!")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_DELAY_SECONDS));
             delay.setOnFinished(event -> {
                 Stage stage = (Stage) userInput.getScene().getWindow();
