@@ -1,5 +1,9 @@
 package woody.task;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
+import woody.exception.InvalidSyntaxException;
 
 /**
  * Represents a deadline task with a description and a due date.
@@ -8,14 +12,21 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructs a deadline task using date-time string.
+     * Constructs a deadline task from a date-time string.
+     * Validates that the date-time follows the expected format.
      *
      * @param description Description of the task.
-     * @param by End date and time of the task.
+     * @param by End date and time of the task in dd-MM-yyyy HHmm format.
+     * @throws InvalidSyntaxException If the date-time format is invalid.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws InvalidSyntaxException {
         super(description);
-        this.by = LocalDateTime.parse(by, INPUT_FORMAT);
+        try {
+            this.by = LocalDateTime.parse(by, INPUT_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new InvalidSyntaxException(
+                    "Deadline must be in format: dd-MM-yyyy HHmm");
+        }
     }
 
     /**
