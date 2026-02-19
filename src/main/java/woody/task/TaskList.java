@@ -1,7 +1,8 @@
 package woody.task;
-import woody.exception.InvalidTaskIndexException;
 
 import java.util.ArrayList;
+
+import woody.exception.InvalidTaskIndexException;
 
 /**
  * Represents a list of tasks in the Woody application.
