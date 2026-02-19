@@ -18,6 +18,7 @@ You interact with it using short commands and get responses in a chat-style inte
   - [Deleting a task: `delete`](#deleting-a-task)
   - [Finding tasks: `find`](#finding-tasks)
   - [Exiting the app: `bye`](#exiting)
+- [Common errors](#common-errors)
 
 ## Quick start
 
@@ -56,8 +57,6 @@ If the file does not exist, Woody creates it on first save. When Woody starts, i
 | `delete <index>` | Removes a task. |
 | `find <keyword>` | Lists tasks that contain the keyword. |
 | `bye` | Exits the app. |
-
----
 
 ## Features
 
@@ -206,3 +205,23 @@ Bye. Hope to see you again soon!
 Example output screenshot:
 
 ![Bye command sample output](images/bye.png)
+
+## Common errors
+
+Woody shows user input errors with a `⚠` prefix.  
+Example: `⚠ Index must be a number.`
+
+| What happened | Message shown by Woody | How to fix |
+| --- | --- | --- |
+| Unknown command | `⚠ Unknown command: "<your input>".` (followed by the list of valid commands) | Use one of: `todo`, `deadline`, `event`, `mark`, `unmark`, `delete`, `list`, `find`, `bye`. |
+| Missing todo description | `⚠ The description of a todo cannot be empty.` | Provide text after `todo`. |
+| Missing index for `mark`, `unmark`, or `delete` | `⚠ Command cannot be empty.` | Enter a task number, e.g. `mark 2`. |
+| Non-numeric index for `mark`, `unmark`, or `delete` | `⚠ Index must be a number.` | Use only digits for the task number. |
+| Task number out of range | `⚠ Task number must be between 1 and <n>.` | Use a number shown in `list`. |
+| Invalid deadline format | `⚠ Deadline must be in format: deadline <desc> /by <date>.` | Include `/by`, e.g. `deadline submit report /by 20/4/1993 1900`. |
+| Invalid event format | `⚠ Event must be in format: event <desc> /from <start> /to <end>.` | Include both `/from` and `/to`. |
+| Startup/load storage issue | `Welcome to Woody!` then `⚠ Failed to load tasks from file.` | Check file permissions/path for `data/woody.txt`, then restart Woody. |
+| Save storage issue on `bye` | `⚠ Failed to save tasks to file.` | Check file permissions/path for `data/woody.txt`, then run `bye` again. |
+
+Note: if a new `event` overlaps an existing event, Woody shows:
+`Task not added, clashes with: ...`
