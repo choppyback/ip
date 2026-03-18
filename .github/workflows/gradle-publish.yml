@@ -1,0 +1,25 @@
+name: Build PR Artifact
+on:
+  pull_request:
+    branches: [ master ] # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' # Match your project's Java version
+          distribution: 'temurin'
+          
+      - name: Build with Gradle
+        run: ./gradlew shadowJar # or './gradlew jar' depending on your project
+        
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-build-app
+          path: build/libs/*.jar # Path where Gradle outputs your JAR
