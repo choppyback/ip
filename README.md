@@ -20,7 +20,7 @@ This keeps feature logic focused, testable, and easy to extend.
 - `Java 17` + `JavaFX` desktop GUI
 - Gradle-based build and packaging
 - Persistent storage at `data/woody.txt`
-- Error handling with applicaiton-specific exceptions
+- Error handling with application-specific exceptions
 - Modular package design for maintainability
 
 ## Project Structure
